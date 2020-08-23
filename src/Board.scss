@@ -1,0 +1,44 @@
+$square-size: 50px;
+
+.board-wrapper {
+    position: relative;
+}
+
+.board-container {
+    display: grid;
+    grid-template-columns: repeat(10, $square-size);
+    grid-template-rows: repeat(8, $square-size);
+    border: 1px solid blanchedalmond;
+}
+
+.board-square {
+    border: 1px solid blanchedalmond;
+}
+
+.square-member {
+    position: absolute;
+    transition: all 0.2s ease-in-out;
+}
+
+.board-piece {
+    height: 30px;
+    pointer-events: none;
+}
+
+.col {
+    @for $i from 1 through 10 {
+        &-#{$i} {
+            .board-square {grid-column-start: $i;}
+            left: $square-size * ($i - 1);
+        }
+    }
+}
+
+.row {
+    @for $i from 1 through 8 {
+        &-#{$i} {
+            .board-square {grid-row-start: $i;}
+            top: $square-size * ($i - 1);
+        }
+    }
+}
