@@ -18,6 +18,8 @@ $square-size: 50px;
 .square-member {
     position: absolute;
     transition: all 0.2s ease-in-out;
+    height: $square-size;
+    width: $square-size;
 }
 
 .board-piece {
