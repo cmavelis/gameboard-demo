@@ -4,13 +4,16 @@ import logo from "./logo.svg";
 import {PIECE_ACTIONS, piecesInitialState, piecesReducer} from './reducers/piecesReducer';
 
 const Piece = (props) => {
-  const {clickHandler, pieceData, id} = props; //TODO: bind id to clickhandler so it doesn't need to b ehere
+  const {clickHandler, pieceData, selected} = props;
   return (
-    <div className={`square-member row-${pieceData.location[0]} col-${pieceData.location[1]}`}
-         onClick={() => clickHandler(id)}
+    <div className={`
+    square-member row-${pieceData.location[0]} col-${pieceData.location[1]}
+    ${selected && 'square-member--selected'}
+    `}
+         onClick={() => clickHandler()}
     >
-      <img src={logo} className="board-piece" alt="logo" /> {id}
-      <span>{pieceData.type}</span>
+      <img src={logo} className='board-piece' alt="logo" />
+      <span className={`board-piece ${pieceData.player === 2 ? 'player-two': ''}`}>{pieceData.type}</span>
     </div>
   )
 }
@@ -55,22 +58,13 @@ const Board = () => {
         )}
 
       </div>
-      <div className={`square-member row-${piecesState[0].location[0]} col-${piecesState[0].location[1]}`}
-           onClick={() => setSelected(0)}
-      >
-        <img src={logo} className="board-piece" alt="logo" /> 0
-      </div>
-      <div className={`square-member row-${piecesState[1].location[0]} col-${piecesState[1].location[1]}`}
-           onClick={() => setSelected(1)}
-      >
-        <img src={logo} className="board-piece" alt="logo" /> 1
-      </div>
-      <Piece
-        clickHandler={setSelected}
-        pieceData={piecesState[2]}
-        id={2}
-      />
-      <h1>{selected?.toString()}</h1>
+      {[0,1,2].map((id)=>
+        <Piece
+          clickHandler={() => setSelected(id)}
+          pieceData={piecesState[id]}
+          selected={selected === id}
+        />
+      )}
     </div>
   );
 };
