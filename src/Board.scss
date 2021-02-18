@@ -1,4 +1,5 @@
 $square-size: 50px;
+$player-two-color: red;
 
 .board-wrapper {
     position: relative;
@@ -18,11 +19,21 @@ $square-size: 50px;
 .square-member {
     position: absolute;
     transition: all 0.2s ease-in-out;
+    height: $square-size;
+    width: $square-size;
+}
+
+.square-member--selected {
+    background: #f6c457;
 }
 
 .board-piece {
     height: 30px;
     pointer-events: none;
+}
+
+.player-two {
+    color: $player-two-color;
 }
 
 .col {
